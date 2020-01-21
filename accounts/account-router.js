@@ -56,13 +56,13 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     try{
         const payload = {
             name: req.body.name,
             budget: req.body.budget,
         }
-        await db("account").where("id", req.params.id).update(payload)
+        await db("accounts").where("id", req.params.id).update(payload)
         res.json( await db("accounts").where("id", req.params.id).first())
     } catch (error){
         next(error)
